@@ -101,7 +101,12 @@ class TicTacToe {
         let y = this.checkEnd();
         this.winner = (this.checkEnd() == "tie") ? "tie" : "ai"; // log the winner 
         // PRINT WINNER HERE
-        $("#winner").text (this.winner);
+        if (this.winner =="ai"){
+          $("#winner").text ("Winner is AI.");
+        }
+        else if(this.winner == "tie"){
+          $("#winner").text ("It's a tie!");
+        }
         console.log("Winner is " + this.winner);
       }
       else this.player = "human"; // next player's turn 
@@ -256,7 +261,12 @@ const make_board = (canvas_name, player, max_depth) => {
             console.log(game.end);
             sketch.clear();
             // PRINT WINNER HERE 
-            $("#winner").text(game.winner);
+            if (this.winner == "human"){
+              $("#winner").text ("Winner is Human.");
+            }
+            else if(this.winner == "tie"){
+              $("#winner").text ("It's a tie!");
+            }
           }
           else { // next player
             game.player = "ai";

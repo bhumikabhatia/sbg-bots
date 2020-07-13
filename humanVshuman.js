@@ -111,8 +111,19 @@ class TicTacToe {
     }
     return win;
   }
-
 };
+
+//restart game
+let temp;
+$(document).ready(function () {
+  $('#submit').click(function (event) {
+    event.preventDefault(); // does not submit as default button does that
+    temp.remove(); // Clears the p5 object
+
+    $('#winner').html('&nbsp;');
+    temp = new p5(make_board(canvas_name, player));
+  })
+})
 
 // board for the game
 const make_board = (canvas_name,player) => {
@@ -147,11 +158,11 @@ const make_board = (canvas_name,player) => {
           let res = game.checkEnd();
           if (res != null) {
             game.winner = (res == "tie") ? "tie" : game.player;
-            console.log("Winner is " + game.winner);
             game.end = "yes";
             sketch.noLoop();
             sketch.clear();
             // PRINT WINNER HERE 
+            $("#winner").text (game.winner);
             sketch.fill(50);
           }
           else { // next player

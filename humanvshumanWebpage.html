@@ -9,7 +9,10 @@
     <!--Using BULMA for designing the front end-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"
         integrity="sha256-aPeK/N8IHpHsvPBCf49iVKMdusfobKo2oxF8lRruWJg=" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/main.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/stylesHvH.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body> 
@@ -17,15 +20,14 @@
         <div class="hero-body">
             <div class="container has-text-centered has-text-white">
                 <!--center the box, default is container-->
-                <h3 class="is-size-3">Human Vs Human</h3>
+                <h3 class="is-size-3" id='winner'>&nbsp</h3>
                 <div id='can1'></div>
-                <form>
-                    <button class="button is-light">Start Again</button>
-                </form>
+                <!--<button class="button is-light">Start Again</button>-->
+                <button id="submit" class="button is-light">Restart</button>
             </div>
         </div>
     </section>
 </body>
-<script src="./humanvhuman.js"></script>
+<script src="humanVshuman.js"></script>
 
 </html>

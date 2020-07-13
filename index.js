@@ -19,18 +19,18 @@ class TicTacToe {
 
     this.ai = 'X';
     this.human = 'O';
-    this.res = [[0,0], [0,0]]; // store x1,y1,x2,y2 for first and last point for line
+    this.res = [[0, 0], [0, 0]]; // store x1,y1,x2,y2 for first and last point for line
     this.player = curr_player;
     this.curr_depth = 0; // start at 0 depth
     this.max_depth = max_depth;
     this.winner = null;
-    this.end = "no";
+    this.end = "no"; // denotes if the game has ended
   }
 
   // the methods
   // It draws the box
   initialise_board = (curr_sketch, w, h) => {
-    curr_sketch.background('#36344203');//'#363442'
+    curr_sketch.background('rgba(54,52,66,0.05)');//'#363442'
     // curr_sketch.background('#36344202'); transparent ------------------------------------------------------
     curr_sketch.strokeWeight(4);
     curr_sketch.stroke('#E9E7F5CC');
@@ -101,6 +101,7 @@ class TicTacToe {
         let y = this.checkEnd();
         this.winner = (this.checkEnd() == "tie") ? "tie" : "ai"; // log the winner 
         // PRINT WINNER HERE
+        $("#winner").text (this.winner);
         console.log("Winner is " + this.winner);
       }
       else this.player = "human"; // next player's turn 
@@ -231,7 +232,9 @@ const make_board = (canvas_name, player, max_depth) => {
     sketch.draw = () => {
       game.initialise_board(sketch, w, h); // find and fill board
       game.render_board(sketch, w, h);
-      if (game.end == "yes") game.drawLine(sketch, w, h);
+      if (game.end == "yes" && game.winner != "tie") {
+        game.drawLine(sketch, w, h);
+      }
     }
     // MOUSE PRESS
     sketch.mousePressed = () => {
@@ -240,7 +243,7 @@ const make_board = (canvas_name, player, max_depth) => {
         let i = Math.floor(sketch.mouseX / w);
         let j = Math.floor(sketch.mouseY / h);
         //line(mouseX,mouseY,mouseX+100,mouseY+100);
-        if (game.board[i][j] == "") {
+        if (game.board[i][j] == "" && game.end == "no") {
           game.board[i][j] = "human";
           game.curr_depth++; // increment the depth
           console.log("human's turn");
@@ -248,13 +251,12 @@ const make_board = (canvas_name, player, max_depth) => {
           let res = game.checkEnd();
           if (res != null) {
             game.winner = (res == "tie") ? "tie" : "human";
-            game.end == "yes";
-            game.drawLine(sketch, w, h);
-            sketch.noLoop();
-            console.log(game.winner);
-            //sketch.clear();
+            game.end = "yes";
+            //sketch.noLoop();
+            console.log(game.end);
+            sketch.clear();
             // PRINT WINNER HERE 
-            sketch.fill(50);
+            $("#winner").text(game.winner);
           }
           else { // next player
             game.player = "ai";
@@ -267,19 +269,29 @@ const make_board = (canvas_name, player, max_depth) => {
   return board;
 }
 
-let level = 'Easy';
-let startingplayer = 'ai';
 let temp;
 $(document).ready(function () {
+  let level = 'Easy';
+  let startingplayer = 'ai';
   temp = new p5(make_board('can1', startingplayer, level));
   consoleHello();
-  $('#depth').change(clicker);
-  $('#player').change(clicker);
+
+  $('#depth').on('change', function () {
+    level = $('#depth').val();
+  });
+
+  $('#player').on('change', function () {
+    startingplayer = $('#player').val();
+  });
+
   $('#submit').click(function (event) {
-    event.preventDefault();
-    temp.remove();
+    event.preventDefault(); // does not submit as default button does that
+    temp.remove(); // Clears the p5 object
+
     console.log(startingplayer);
     console.log(level);
+
+    $('#winner').html('&nbsp;');
     temp = new p5(make_board('can1', startingplayer, level));
   })
 })
@@ -290,10 +302,6 @@ $(document).ready(function () {
 //new p5(make_board('can4'));
 
 //1,3,5,7,Infinity
-function clicker(variable) {
-  variable = $(this).children("option:selected").val();
-  console.log(variable);
-}
 // This is to print SBG bots in console 
 function consoleHello() {
   var userAgent = navigator.userAgent.toLowerCase();

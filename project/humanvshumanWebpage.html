@@ -1,0 +1,35 @@
+<!--START AGAIN BUTTON NOT WORKING RN -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+    <!--Using BULMA for designing the front end-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"
+        integrity="sha256-aPeK/N8IHpHsvPBCf49iVKMdusfobKo2oxF8lRruWJg=" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesHvH.css">
+</head>
+
+<body> 
+    <section class="hero is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered has-text-white">
+                <!--center the box, default is container-->
+                <h3 class="is-size-3">Human Vs Human</h3>
+                <div id='can1'></div>
+                <!--<button class="button is-light">Start Again</button>-->
+                <button onclick="myButton()">Start Again</button>
+                <script>
+                    function myButton(){
+                        location.reload();
+                    }
+                </script>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="humanVshuman.js"></script>
+
+</html>

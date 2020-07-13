@@ -1,0 +1,7 @@
+.hero{
+    background-image: url("images/backgroundSpace.jpg");
+    background-color: #363442;
+    background-position: right bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+}

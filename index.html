@@ -1,52 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
-    <!--Using BULMA for designing the front end-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"
-        integrity="sha256-aPeK/N8IHpHsvPBCf49iVKMdusfobKo2oxF8lRruWJg=" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-
-<body> 
-    <section class="hero is-fullheight">
-        <div class="hero-body">
-            <div class="container has-text-centered has-text-white">
-                <!--center the box, default is container-->
-                <h3 class="is-size-3">Human Vs AI</h3>
-                <form class="container">
-                    <!--for the difficulty and the starting player-->
-                    <div class="select">
-                        <label class="depth">Choose Difficulty:</label>
-                        <select class="hi" id="depth" name="depth">
-                            <option value="Easy">Easy</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Difficult">Difficult</option>
-                            <option value="Very Difficult">Very Difficult</option>
-                            <option value="Impossible">Impossible</option>
-                        </select>
-                    </div>
-                    <div class="select">
-                        <label class="player">Starting Player:</label>
-                        <select id="player" name="player">
-                            <option value="ai">AI</option>
-                            <option value="human">Human</option>
-                        </select>
-                    </div>
-                    <button id="submit" class="button is-light">Restart</button>
-                </form>
-                <br><br>
-                <div id='can1'></div>
-            </div>
+<html>
+    <head>
+        <title>Entertain the Crew</title>
+        <link rel="stylesheet" href="normalize.css">
+        <link rel="stylesheet" href="style.css">
+        <header class="site-header">
+            Entertaining The Crew
+        </header>
+    </head>
+    <body>
+        <!---main menu---->
+        <div class="container">
+            <button class="btn btn1">Home</button>
+            <button class="btn btn2">About</button>
+            <a href="tictactoe.html">
+                <button class="btn btn3">Tic Tac Toe</button>
+            </a>
+            <button class="btn btn4">Meet the Team</button>
         </div>
-    </section>
-</body>
-<script src="./index.js"></script>
-
+    </body>
 </html>

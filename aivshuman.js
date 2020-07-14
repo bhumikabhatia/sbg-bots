@@ -63,7 +63,12 @@ class TicTacToe {
       }
     }
   }
-
+  print_winner = () => {
+    if (this.winner!="tie")
+      $("#winner").text ("Winner is "+this.winner+"!");
+    else 
+      $("#winner").text ("It's a "+this.winner+"!");
+  }
   find_move = () => {
     // AI player - find move
     //console.log(this.winner);
@@ -101,12 +106,7 @@ class TicTacToe {
         let y = this.checkEnd();
         this.winner = (this.checkEnd() == "tie") ? "tie" : "ai"; // log the winner 
         // PRINT WINNER HERE
-        if (this.winner =="ai"){
-          $("#winner").text ("Winner is AI.");
-        }
-        else if(this.winner == "tie"){
-          $("#winner").text ("It's a tie!");
-        }
+        this.print_winner();
         console.log("Winner is " + this.winner);
       }
       else this.player = "human"; // next player's turn 
@@ -261,12 +261,7 @@ const make_board = (canvas_name, player, max_depth) => {
             console.log(game.end);
             sketch.clear();
             // PRINT WINNER HERE 
-            if (this.winner == "human"){
-              $("#winner").text ("Winner is Human.");
-            }
-            else if(this.winner == "tie"){
-              $("#winner").text ("It's a tie!");
-            }
+            game.print_winner();
           }
           else { // next player
             game.player = "ai";

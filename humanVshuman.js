@@ -162,7 +162,7 @@ const make_board = (canvas_name,player) => {
             sketch.noLoop();
             sketch.clear();
             // PRINT WINNER HERE 
-            $("#winner").text (game.winner);
+            $("#winner").text ("Winner : " + game.winner);
             sketch.fill(50);
           }
           else { // next player

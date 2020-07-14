@@ -142,7 +142,9 @@ const make_board = (canvas_name,player) => {
     sketch.draw = () => {
       game.initialise_board(sketch, w, h); // find and fill board
       game.render_board(sketch, w, h);
-      if (game.end=="yes") game.drawLine(sketch,w,h);
+      if (game.end=="yes" && game.winner!="tie") {
+        game.drawLine(sketch,w,h);
+      }
     }
     // MOUSE PRESS
     sketch.mousePressed = () => {
@@ -151,7 +153,7 @@ const make_board = (canvas_name,player) => {
         let i = Math.floor(sketch.mouseX / w);
         let j = Math.floor(sketch.mouseY / h);
         //line(mouseX,mouseY,mouseX+100,mouseY+100);
-        if (game.board[i][j] == "") {
+        if (game.board[i][j] == "" && game.end=="no") {
           game.board[i][j] = game.player;
           //console.log("player1's turn");
           // check if player1 won
@@ -162,7 +164,7 @@ const make_board = (canvas_name,player) => {
             sketch.noLoop();
             sketch.clear();
             // PRINT WINNER HERE 
-            $("#winner").text (game.winner);
+            $("#winner").text ("Winner: "+game.winner);
             sketch.fill(50);
           }
           else { // next player

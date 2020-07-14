@@ -18,7 +18,7 @@
 <body> 
     <section class="is-large has-text-centered is-light">
         <h1 class="site-header">
-            Human vs. AI Tic-Tac-Toe
+            Tic-Tac-Toe: Human vs. AI 
         </h1>
     </section>
     <section class="hero is-fullheight">
@@ -29,7 +29,7 @@
                     <!--center the box, default is container-->
                         <form class="container">
                         <!--for the difficulty and the starting player-->
-                        <div class="select is-multiple">
+                        <div class="select is-multiple is-size-6">
                             <label class="depth">Select difficulty level:</label>
                             <br>
                             <select multiple size="5" class="depth" id="depth" name="depth">
@@ -40,7 +40,7 @@
                                 <option value="Impossible">Impossible</option>
                             </select>
                         </div>
-                        <div class="select is-multiple">
+                        <div class="select is-multiple is-size-6">
                             <label class="player">Starting Player:</label>
                             <br>
                             <select multiple size="2" class="player" id="player" name="player">
@@ -49,22 +49,25 @@
                             </select>
                         </div>
                         <br><br>
-                        <button id="submit" class="button is-light">Start Game</button>
+                        <button id="submit" class="button is-light is-size-6">Start Game</button>
                         </form>
                     </div>
                 <!--/div-->
             </div>
             <div class="column is-two-fifths has-text-centered is-light">
-                <div id='can1'></div>
                 <br>
                 <div class="result">
                     <h3 class="is-size-3" id='winner'>&nbsp;</h3>
                 </div>
                 <br>
+                <div id='can1'></div>
             </div>
             <div class="column is-one-quarter">
                 <div class="box">
-                    <p>
+                    <p class="para is-size-6">
+                        <header class="para-header">
+                            Instructions
+                        </header>
                         In order to win the game, a player must place three 
                         of their marks in a horizontal, vertical, or diagonal row.
                     </p>

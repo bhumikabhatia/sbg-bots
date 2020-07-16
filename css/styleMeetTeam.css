@@ -1,21 +1,164 @@
-body
-{
+*{
     margin: 0;
     padding: 0;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none;
+    font-family: 'Montserrat';
 }
-.hero{
+body{
     background-image: url("backgroundSpace.jpg");
-    background-color: #363442;
-    background-position: right bottom;
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
-.site-header
-{
+.site-header{
+    margin: 0;
     background: #eee;
     color: #000;
     padding: 10px;
     text-align: center;
     font-size: 30px;
 }
+.main{
+    width: calc(100% - 20rem);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10rem;
+}
+.main-card-body{
+    position: relative;
+    width: calc(100% / 3 - 1rem);
+    height: 400px;
+    cursor: pointer;
+    text-align: center;
+}
+.main-card-body:hover .main-card-front{
+    transform: rotateY(-180deg);
+    z-index: 0;
+}
+.main-card-body:hover .main-card-back{
+    transform: rotateY(0deg);
+    z-index: 0;
+}
+.main-card{
+    width: 100%;
+    height: 100%;
+    background-color: honeydew;
+    border-radius: .25rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .8s;
+    backface-visibility: hidden;
+    box-shadow: 0 1.5rem 4rem rgba(0,0,0,0.15);
+}
+.main-card-front , .main-card-back{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    align-items: center;
+}
+.main-card-front{
+    transform: rotateY(0deg);
+    z-index: 1;
+}
+.main-card-front img
+{
+    height: 100%;
+}
+.main-card-back{
+    transform: rotateY(180deg);
+}
+.back-content{
+    color: darkslategray;
+    text-align: center;
+    margin-top: 150px;
+    width: 100%;
+    border: 0;
+}
+.sm{
+    margin: 20px 0;
+}
+.sm a , .sm .icon{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    color: darkslategray;
+    font-size: 18px;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+.sm .icon{
+    height: 23px;
+}
+.sm a:hover{
+    background: grey;
+    color: honeydew;
+}
+
+
+/*
+.middle{
+    position: relative;
+    top: 35%;
+    transform: translate(-50%, -50%);
+}
+.card{
+    cursor: pointer;
+    width: 340px;
+    height: 480px;
+}
+.front, .back{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    transition: transform .6s linear;
+}
+.front img{
+    height: 100%;
+}
+.front{
+    transform: perspective(600px) rotateY(0deg);
+}
+.back{
+    background: #f1f1f1;
+    transform: perspective(600px) rotateY(180deg);
+}
+.back-content{
+    position: absolute;
+    color: darkslategray;
+    text-align: center;
+    width: 100%;
+}
+.sm{
+    margin: 20px 0;
+}
+.sm a , .sm .icon{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    color: darkslategray;
+    font-size: 18px;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+.sm .icon{
+    height: 23px;
+}
+.sm a:hover{
+    background: grey;
+    color: honeydew;
+}
+.card:hover > .front{
+    transform: perspective(600px) rotateY(-180deg);
+}
+.card:hover > .back{
+    transform: perspective(600px) rotateY(0deg);    
+}
+*/

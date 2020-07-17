@@ -22,15 +22,14 @@
         </h1>
     </section>
     <section class="hero is-fullheight">
-        <div class="hero-body">
+        <div class="hero-body container">
             <div class="column is-one-quarter">
                     <div class="container has-text-centered has-text-white">
                     <!--center the box, default is container-->
                         <form class="container">
                         <!--for the difficulty and the starting player-->
-                        <div class="select is-multiple is-size-6">
+                        <div class="select is-multiple is-size-6 mx-4">
                             <label class="depth">Select difficulty level:</label>
-                            <br>
                             <select multiple size="5" class="depth" id="depth" name="depth">
                                 <option value="Easy">Easy</option>
                                 <option value="Medium">Medium</option>
@@ -41,23 +40,19 @@
                         </div>
                         <div class="select is-multiple is-size-6">
                             <label class="player">Starting Player:</label>
-                            <br>
                             <select multiple size="2" class="player" id="player" name="player">
                                 <option value="ai">AI</option>
                                 <option value="human">Human</option>
                             </select>
                         </div>
-                        <br><br>
-                        <button id="submit" class="button is-light is-size-6">Start Game</button>
+                        <button id="submit" class="button is-light is-size-6 mt-2">Start Game</button>
                         </form>
                     </div>
             </div>
             <div class="column is-two-fifths has-text-centered is-light">
-                <br>
                 <div class="result">
                     <h3 class="is-size-3" id='winner'>&nbsp;</h3>
                 </div>
-                <br>
                 <div id='can1'></div>
             </div>
             <div class="column is-one-quarter">
@@ -72,14 +67,13 @@
                 </div>
             </div>
     </section>
-    <footer>
+    <footer class="footer has-background-grey-dark">
         <div class="wrapper">
-            <span>Made with love by SBG Bots <a href="meetTheTeam.html"><img src="images/copyright.svg"></a></span>                    
+            <span>Made with <img src="images/heart.svg"> by SBG Bots <a href="meetTheTeam.html"><img src="images/copyright.svg"></a></span>
                 <br><a href="MAINPAGE.html">Home</a>                          
-                <br><a href="#">View on GitHub</a>
+                <br><a href="https://github.com/bhumikabhatia/sbg-bots">View on GitHub</a>
         </div>
     </footer>
 </body>
 <script src="aivshuman.js"></script>
-
 </html>

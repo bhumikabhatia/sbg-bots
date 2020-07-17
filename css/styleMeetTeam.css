@@ -126,3 +126,6 @@ p{
 .wrapper img{
     height: 13px;
 }
+.attribute{
+    font-size: smaller;
+}

@@ -59,3 +59,17 @@ body
     font-size: 20px;
     align-content: center;
 }
+
+/*-------------footer-----------*/
+footer{
+    width: 100%;
+    background-color: rgb(88, 100, 112);
+    padding: 15px 0px;
+    color: black;
+}
+.wrapper{
+    text-align: center;
+}
+.wrapper img{
+    height: 13px;
+}

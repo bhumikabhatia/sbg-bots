@@ -38,3 +38,16 @@ body
 {
     color: #fff;
 }
+
+/*-------------footer-----------*/
+footer{
+    width: 100%;
+    background-color: rgb(88, 100, 112);
+    padding: 15px 0px;
+}
+.wrapper{
+    text-align: center;
+}
+.wrapper img{
+    height: 13px;
+}

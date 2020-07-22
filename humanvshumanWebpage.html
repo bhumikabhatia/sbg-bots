@@ -13,6 +13,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/main.css">
+    <script src="randomFactGenerator.js" type="text/javascript"></script>
 </head>
 
 <body> 
@@ -23,15 +24,21 @@
     </section>
     <section class="hero is-fullheight">
         <div class="hero-body">
+            <!--fun facts-->
             <div class="column is-one-quarter">
-                <div class="box mx-4">
+                <div class="box mx-4 has-text-centered">
                     <p class="para is-size-6">
                         <header class="para-header">
-                            Instructions
+                            Fact Time! (Yay! I'm learning something new today!) 
                         </header>
-                        In order to win the game, a player must place three 
-                        of their marks in a horizontal, vertical, or diagonal row.
-                    </p>
+                        <br>
+                        </p>
+                        <button id="fact_button" class="button is-light is-size-6 has-text-centered" onclick="FunFact()">
+                            Click me for a fun-fact!
+                        </button>                    
+                </div>
+                <div class="box has-text-justified">
+                    <div id="facts"></div>
                 </div>
             </div>
             
@@ -47,9 +54,9 @@
                 </div>
             </div> 
             <div class="column is-one-quarter">
-                <div class="box mx-4">
+                <div class="box mx-4 has-text-justified">
                     <p class="para is-size-6">
-                        <header class="para-header">
+                        <header class="para-header has-text-centered">
                             Instructions
                         </header>
                         In order to win the game, a player must place three 

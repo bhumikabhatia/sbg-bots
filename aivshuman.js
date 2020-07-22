@@ -119,7 +119,7 @@ class TicTacToe {
           this.board[i][j] = this.player; // occupy it
           // now find score after making this move
           let newplayer = (this.player=="ai") ? "human" : "ai";
-          let score = this.minimax(this.curr_depth,newplayer);
+          let score = this.minimax(this.curr_depth,newplayer,-Infinity,Infinity); // pass alpha and beta
           console.log(score);
           // undo move so that we can evaluate other moves
           this.board[i][j] = '';
@@ -157,7 +157,7 @@ class TicTacToe {
     }
 
   }
-  minimax = (depth, player) => {
+  minimax = (depth, player,alpha,beta) => {
     // first check if board is full by this move or winner or max_depth reached
     let result = this.checkEnd();
     //console.log("The depth is " + depth);
@@ -180,13 +180,19 @@ class TicTacToe {
           this.board[i][j] = player; // AI or HUMAN depends 
           // recursive call
           let newplayer = (player == "ai") ? "human" : "ai";
-          let score = this.minimax(depth + 1, newplayer); // increment depth
+          let score = this.minimax(depth + 1, newplayer,alpha,beta); // increment depth
           //console.log(player,score);
           // backtrack
           this.board[i][j] = "";
           if (player == "ai") {
             bestscore = Math.max(score, bestscore);
-          } else bestscore = Math.min(score, bestscore);
+            alpha = Math.max(alpha,score);
+          } 
+          else {
+            bestscore = Math.min(score, bestscore);
+            beta = Math.min(beta,score);
+          }
+          if (beta<=alpha) break; // pruning the current tree state as it won't affect the outcome
         }
       }
     }

@@ -9,7 +9,7 @@
 // ways to trick - always start with any of the corners or center if AI starts first
 let first_move_ai = [[0, 0], [0, 2], [1, 1], [2, 0], [2, 2]];
 class TicTacToe {
-  constructor(max_depth, curr_player, w, h) {
+  constructor(max_depth, curr_player, w, h,helper) {
 
     this.board = [
       ['', '', ''],
@@ -25,7 +25,7 @@ class TicTacToe {
     this.max_depth = max_depth;
     this.winner = null;
     this.end = "no"; // denotes if the game has ended
-    this.helper = true; // default
+    this.helper = helper=="true" ? true: false; // default
     this.nexthumanmove = [];
   }
 
@@ -67,7 +67,7 @@ class TicTacToe {
   }
   // draws the hint box
   highlight_hint = (curr_sketch,w,h) => {
-    if (this.player=="human" && this.end=="no" && this.helper=="true"){ // ADD THE BUTTON CLICK CONDITION HERE SO THIS FUNCTION IS ONLY ACTIVATED THEN
+    if (this.player=="human" && this.end=="no" && this.helper==true){ // ADD THE BUTTON CLICK CONDITION HERE SO THIS FUNCTION IS ONLY ACTIVATED THEN
     this.human_move_help();
     // now highlight hint placed in this.humannextmove
     let x = this.nexthumanmove[0]*w;
@@ -100,7 +100,7 @@ class TicTacToe {
       res = this.find_move();
       this.nexthumanmove = res;
       }
-      console.log("Best move for human rn is "+ res[0]+" "+res[1]);
+      //console.log("Best move for human rn is "+ res[0]+" "+res[1]);
       // show the move on the board
       this.nexthumanmove = res;
     }
@@ -256,14 +256,14 @@ class TicTacToe {
 };
 
 // board for the game
-const make_board = (canvas_name, player, max_depth) => {
+const make_board = (canvas_name, player, max_depth,helper) => {
   let w, h;
   if (max_depth == "Easy") max_depth = 1;
   else if (max_depth == "Medium") max_depth = 3;
   else if (max_depth == "Difficult") max_depth = 5;
   else if (max_depth == "Very Difficult") max_depth = 7;
   else max_depth = Infinity;
-  var game = new TicTacToe(max_depth, player, w, h);
+  var game = new TicTacToe(max_depth, player, w, h,helper);
 
   let board = (sketch) => {
     // SETUP 
@@ -326,7 +326,8 @@ let temp;
 $(document).ready(function () {
   let level = 'Easy';
   let startingplayer = 'ai';
-  temp = new p5(make_board('can1', startingplayer, level));
+  let helper = false; // default
+  temp = new p5(make_board('can1', startingplayer, level,helper));
   consoleHello();
 
   $('#depth').on('change', function () {
@@ -347,9 +348,9 @@ $(document).ready(function () {
 
     console.log(startingplayer);
     console.log(level);
-
+    console.log(helper);
     $('#winner').html('&nbsp;');
-    temp = new p5(make_board('can1', startingplayer, level));
+    temp = new p5(make_board('can1', startingplayer, level,helper));
   })
 })
 

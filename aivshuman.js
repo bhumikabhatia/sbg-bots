@@ -72,6 +72,8 @@ class TicTacToe {
     // now highlight hint placed in this.humannextmove
     let x = this.nexthumanmove[0]*w;
     let y = this.nexthumanmove[1]*h;
+    curr_sketch.stroke('white');
+    curr_sketch.fill(255,20);
     curr_sketch.rect(x,y,w,h);
     }
   }

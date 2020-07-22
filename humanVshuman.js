@@ -113,18 +113,6 @@ class TicTacToe {
   }
 };
 
-//restart game
-let temp;
-$(document).ready(function () {
-  $('#submit').click(function (event) {
-    event.preventDefault(); // does not submit as default button does that
-    temp.remove(); // Clears the p5 object
-
-    $('#winner').html('&nbsp;');
-    temp = new p5(make_board(canvas_name, player));
-  })
-})
-
 // board for the game
 const make_board = (canvas_name,player) => {
   let w, h;
@@ -177,7 +165,20 @@ const make_board = (canvas_name,player) => {
   }
   return board;
 }
-new p5(make_board('can1',"player1")); 
+
+//restart game
+let temp;
+$(document).ready(function () {
+  temp = new p5(make_board('can1',"player1"));
+  $('#submit').click(function (event) {
+    event.preventDefault(); // does not submit as default button does that
+    temp.remove(); // Clears the p5 object
+
+    $('#winner').html('&nbsp;');
+    temp = new p5(make_board('can1', "player1"));
+  })
+})
+//new p5(make_board('can1',"player1")); 
 
 //1,3,5,7,Infinity
 

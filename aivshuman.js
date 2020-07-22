@@ -67,7 +67,7 @@ class TicTacToe {
   }
   // draws the hint box
   highlight_hint = (curr_sketch,w,h) => {
-    if (this.player=="human" && this.end=="no"){ // ADD THE BUTTON CLICK CONDITION HERE SO THIS FUNCTION IS ONLY ACTIVATED THEN
+    if (this.player=="human" && this.end=="no" && this.helper=="true"){ // ADD THE BUTTON CLICK CONDITION HERE SO THIS FUNCTION IS ONLY ACTIVATED THEN
     this.human_move_help();
     // now highlight hint placed in this.humannextmove
     let x = this.nexthumanmove[0]*w;
@@ -335,6 +335,10 @@ $(document).ready(function () {
 
   $('#player').on('change', function () {
     startingplayer = $('#player').val();
+  });
+
+  $('#helper').on('change', function () {
+    helper = $('#helper').val();
   });
 
   $('#submit').click(function (event) {

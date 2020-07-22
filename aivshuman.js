@@ -109,11 +109,8 @@ class TicTacToe {
     return;
   }
   find_move = () => {
-    // AI player - find move
-    //console.log(this.winner);
-    //if (this.winner!=null) return;
     let bestscore = this.player == "ai" ? -Infinity : Infinity;
-    //let bestdepth = -1;
+
     let move;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
@@ -151,7 +148,6 @@ class TicTacToe {
       this.curr_depth++;
       if (this.checkEnd() != null) {
         this.end = "yes";
-        let y = this.checkEnd();
         this.winner = (this.checkEnd() == "tie") ? "tie" : "ai"; // log the winner 
         // PRINT WINNER HERE
         this.print_winner();
@@ -372,7 +368,7 @@ function consoleHello() {
 
     if (userAgent.indexOf('chrome') > -1) {
       dark += ';';
-      dark += ['padding: 18px 5px 16px 40px', 'background-image: url(https://images-na.ssl-images-amazon.com/images/I/41sH7IIheaL._SY355_.png)', 'background-position: 10px 9px', 'background-repeat: no-repeat', 'background-size: 30px 30px'].join(';');
+      dark += ['padding: 18px 5px 16px 40px', 'background-image: url("https://i.imgur.com/ElEn6VW.png")', 'background-position: 10px 9px', 'background-repeat: no-repeat', 'background-size: 30px 30px'].join(';');
     }
 
     var red = ['padding: 18px 5px 16px', 'background-color: #e74c3c', 'color: #ffffff'].join(';');

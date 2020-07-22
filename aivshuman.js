@@ -25,6 +25,8 @@ class TicTacToe {
     this.max_depth = max_depth;
     this.winner = null;
     this.end = "no"; // denotes if the game has ended
+    this.helper = true; // default
+    this.nexthumanmove = [];
   }
 
   // the methods
@@ -63,40 +65,84 @@ class TicTacToe {
       }
     }
   }
+  // draws the hint box
+  highlight_hint = (curr_sketch,w,h) => {
+    if (this.player=="human" && this.end=="no"){ // ADD THE BUTTON CLICK CONDITION HERE SO THIS FUNCTION IS ONLY ACTIVATED THEN
+    this.human_move_help();
+    // now highlight hint placed in this.humannextmove
+    let x = this.nexthumanmove[0]*w;
+    let y = this.nexthumanmove[1]*h;
+    curr_sketch.rect(x,y,w,h);
+    }
+  }
   print_winner = () => {
     if (this.winner!="tie")
       $("#winner").text ("Winner is "+this.winner+"!");
     else 
       $("#winner").text ("It's a "+this.winner+"!");
   }
+  human_move_help = () =>{
+    if (this.helper==true && this.player=="human" && this.end=="no"){
+      // edge case - first move human
+      let res = [];
+      let count = 0;
+      for (let i=0;i<3;i++){
+          for (let j=0;j<3;j++){
+            if (this.board[i][j]=='') count++;
+            else break;
+          }
+      }
+      if (count==9){ 
+        let moves = first_move_ai[Math.floor(Math.random() * first_move_ai.length)];
+        res = moves;
+      }
+      else{
+      res = this.find_move();
+      this.nexthumanmove = res;
+      }
+      console.log("Best move for human rn is "+ res[0]+" "+res[1]);
+      // show the move on the board
+      this.nexthumanmove = res;
+    }
+    return;
+  }
   find_move = () => {
     // AI player - find move
     //console.log(this.winner);
     //if (this.winner!=null) return;
-    let highest_score = -Infinity;
+    let bestscore = this.player == "ai" ? -Infinity : Infinity;
     //let bestdepth = -1;
     let move;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         // check if free
         if (this.board[i][j] == '') {
-          this.board[i][j] = "ai"; // occupy it
+          this.board[i][j] = this.player; // occupy it
           // now find score after making this move
-          let scoree = this.minimax(this.curr_depth, "human");
-          console.log(scoree);
+          let newplayer = (this.player=="ai") ? "human" : "ai";
+          let score = this.minimax(this.curr_depth,newplayer);
+          console.log(score);
           // undo move so that we can evaluate other moves
-          this.board[i][j] = "";
-          if (scoree > highest_score) {
-            highest_score = Math.max(scoree, highest_score);
+          this.board[i][j] = '';
+          if (this.player == "ai" && score>bestscore) {
+            bestscore = Math.max(score, bestscore);
             console.log(i + " " + j);
             move = [i, j]; // current position that yields max score
-          }
+          } else if (this.player=="human" && score<bestscore){
+            bestscore = Math.min(score, bestscore);
+            move = [i,j];
+          } 
+          
         }
       }
     }
     // decide move 
     let x, y;
-    if (highest_score != -Infinity) {
+    if (this.player!="ai"){
+      // return best move possible
+      return move;
+    }
+    if (bestscore != -Infinity) {
       x = move[0];
       y = move[1];
       this.board[x][y] = "ai"; // check if move leads to winning
@@ -118,7 +164,7 @@ class TicTacToe {
     let result = this.checkEnd();
     //console.log("The depth is " + depth);
 
-    if (result != null || depth >= this.max_depth) {
+    if (result != null || (depth >= this.max_depth && this.player=="ai")) {
       // we have a winner or draw
       //console.log("The winner is" + this.winner);
       if (result == "ai") return 100 - depth;
@@ -227,8 +273,8 @@ const make_board = (canvas_name, player, max_depth) => {
       w = sketch.width / 3;
       h = sketch.height / 3;
       // first player is AI - choose between all corners and center
-      if (game.player == 'ai') {
-        let items = first_move_ai[Math.floor(Math.random() * first_move_ai.length)];
+      let items = first_move_ai[Math.floor(Math.random() * first_move_ai.length)];
+      if (game.player=='ai'){
         game.board[items[0]][items[1]] = "ai";
         game.player = "human";
       }
@@ -237,6 +283,7 @@ const make_board = (canvas_name, player, max_depth) => {
     sketch.draw = () => {
       game.initialise_board(sketch, w, h); // find and fill board
       game.render_board(sketch, w, h);
+      game.highlight_hint(sketch,w,h);
       if (game.end == "yes" && game.winner != "tie") {
         game.drawLine(sketch, w, h);
       }
@@ -247,6 +294,7 @@ const make_board = (canvas_name, player, max_depth) => {
         //console.log("hi");
         let i = Math.floor(sketch.mouseX / w);
         let j = Math.floor(sketch.mouseY / h);
+        game.human_move_help();
         //line(mouseX,mouseY,mouseX+100,mouseY+100);
         if (game.board[i][j] == "" && game.end == "no") {
           game.board[i][j] = "human";

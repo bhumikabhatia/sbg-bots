@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
     <!--Using BULMA for designing the front end-->
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"
         integrity="sha256-aPeK/N8IHpHsvPBCf49iVKMdusfobKo2oxF8lRruWJg=" crossorigin="anonymous">
 
@@ -27,38 +30,36 @@
             Tic-Tac-Toe: Human vs. AI
         </h1>
     </div>
-    <div class="container columns is-vcentered is-centered">
-        <div class="column is-one-quarter">
-            <div class="has-text-centered has-text-white">
-                <!--center the box, default is container-->
-                <form>
-                    <!--for the hints , difficulty and the starting player-->
-                    <div class="select is-multiple is-size-6">
-                        <label class="depth">Select difficulty level:</label>
-                        <select multiple size="5" class="depth" id="depth" name="depth">
-                            <option value="Easy">Easy</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Difficult">Difficult</option>
-                            <option value="Very Difficult">Very Difficult</option>
-                            <option value="Impossible">Impossible</option>
-                        </select>
-                    </div>
-                    <div class="select is-multiple is-size-6">
-                        <label class="player">Starting Player:</label>
-                        <select multiple size="2" class="player" id="player" name="player">
-                            <option value="ai">AI</option>
-                            <option value="human">Human</option>
-                        </select>
-                    </div>
-                    <div class="select is-multiple is-size-6">
-                        <label class="helper">Want hints?</label>
-                        <input type="checkbox" size="2" class="checkbox" id="helper" name="helper">
-                        </input>
-                    </div>
-                    <button id="submit" class="button is-light is-size-6 mt-2">Start Game</button>
-                </form>
-            </div>
-
+    <div class="columns mx-2 my-2 is-vcentered is-centered">
+        <div class="column mx-2 my-2 is-one-quarter is-vcentered has-text-centered has-text-white">
+            <form>
+                <!--for the hints , difficulty and the starting player-->
+                <div class="select is-multiple is-size-6">
+                    <label class="depth">Select difficulty level:</label>
+                    <select multiple size="5" class="depth" id="depth" name="depth">
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Difficult">Difficult</option>
+                        <option value="Very Difficult">Very Difficult</option>
+                        <option value="Impossible">Impossible</option>
+                    </select>
+                </div>
+                <div class="select is-multiple is-size-6">
+                    <label class="player">Starting Player:</label>
+                    <select multiple size="2" class="player" id="player" name="player">
+                        <option value="ai">AI</option>
+                        <option value="human">Human</option>
+                    </select>
+                </div>
+                <div class="select is-multiple is-size-6">
+                    <label class="helper">Want hints?</label>
+                    <select multiple size="2" class="helper" id="helper" name="helper">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <button id="submit" class="button is-light is-size-6 mt-2">Start Game</button>
+            </form>
         </div>
         <div class="column is-two-fifths has-text-centered is-light">
             <div class="result">
@@ -88,6 +89,5 @@
         </div>
     </footer>
 </body>
-<script src="aivshuman.js"></script>
-
+<script type="text/babel" src="aivshuman.js"></script>
 </html>

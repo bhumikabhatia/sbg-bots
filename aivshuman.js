@@ -330,8 +330,8 @@ let temp;
 $(document).ready(function () {
   let level = 'Easy';
   let startingplayer = 'ai';
-  var helper = true; // default
-  temp = new p5(make_board('can1', startingplayer, level, helper));
+  let helper = false; // default
+  temp = new p5(make_board('can1', startingplayer, level,helper));
   consoleHello();
 
   $('#depth').on('change', function () {
@@ -342,17 +342,8 @@ $(document).ready(function () {
     startingplayer = $('#player').val();
   });
 
- $('#helper').click(function(){
-    if($(this).is(":checked")){
-      console.log("Hints enabled.");
-      helper = true;
-      temp.hints_switch(helper);
-    }
-    else if($(this).is(":not(:checked)")){
-      console.log("Hints disabled.");
-      helper = false;
-      temp.hints_switch(helper);
-   }
+  $('#helper').on('change', function () {
+    helper = $('#helper').val();
   });
 
   $('#submit').click(function (event) {
@@ -362,7 +353,6 @@ $(document).ready(function () {
     console.log(startingplayer);
     console.log(level);
     console.log(helper);
-
     $('#winner').html('&nbsp;');
     temp = new p5(make_board('can1', startingplayer, level,helper));
   })

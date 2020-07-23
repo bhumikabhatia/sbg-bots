@@ -1,13 +1,6 @@
 'use strict';
-// TASKS TO DO --------------------------------------------------
-// PRINT WINNER
-// FIX THE BUTTON 
-// ALIGN CHOOSING OPTIONS ON THE LEFT SIDE OF CANVAS
-
-// TIMED TIC TAC TOE - FOR DUMMIES
-// 3 BOARD TIC TAC TOE
-// ways to trick - always start with any of the corners or center if AI starts first
-//let first_move_ai = [[0, 0], [0, 2], [1, 1], [2, 0], [2, 2]];
+// AIM OF GAME IS TO LOSE! DO NOT MAKE 3 
+let first_move_ai = [[0, 0], [0, 2],[1, 0],[1,2],[2, 1],[2, 0], [2, 2]]; // anything but center 
 class TicTacToe {
   constructor(max_depth, curr_player, w, h,helper) {
 
@@ -25,7 +18,7 @@ class TicTacToe {
     this.max_depth = max_depth;
     this.winner = null;
     this.end = "no"; // denotes if the game has ended
-    this.helper = helper=="true" ? true: false; // default
+    this.helper = helper=="true" ? true : false; // default
     this.nexthumanmove = [];
   }
 
@@ -49,15 +42,15 @@ class TicTacToe {
         let x = w * i + w / 2;
         let y = h * j + h / 2;
         let spot = this.board[i][j];
-        //console.log("I AM IN DARWWW");
         curr_sketch.textSize(32);
 
         let r = w / 2.8;
         if (spot == "human") {
-            curr_sketch.stroke('limegreen');
+            curr_sketch.stroke('red');
             curr_sketch.line(x - r, y - r, x + r, y + r);
             curr_sketch.line(x + r, y - r, x - r, y + r);
         } else if (spot == "ai") {
+          //curr_sketch.delay(1);
           curr_sketch.stroke('red');
           curr_sketch.line(x - r, y - r, x + r, y + r);
           curr_sketch.line(x + r, y - r, x - r, y + r);
@@ -86,31 +79,13 @@ class TicTacToe {
   human_move_help = () =>{
     if (this.helper==true && this.player=="human" && this.end=="no"){
       // edge case - first move human
-      let res = [];
-      let count = 0;
-      for (let i=0;i<3;i++){
-          for (let j=0;j<3;j++){
-            if (this.board[i][j]=='') count++;
-            else break;
-          }
-      }
-      if (count==9){ 
-        let moves = first_move_ai[Math.floor(Math.random() * first_move_ai.length)];
-        res = moves;
-      }
-      else{
-      res = this.find_move();
-      this.nexthumanmove = res;
-      }
-      //console.log("Best move for human rn is "+ res[0]+" "+res[1]);
-      // show the move on the board
+      let res = this.find_move();
       this.nexthumanmove = res;
     }
     return;
   }
   find_move = () => {
     let bestscore = this.player == "human" ? -Infinity : Infinity;
-
     let move;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
@@ -142,13 +117,13 @@ class TicTacToe {
       return move;
     }
     if (bestscore != Infinity) {
+      // if it is AI's first move when human has already played
       x = move[0];
       y = move[1];
       this.board[x][y] = "ai"; // check if move leads to winning
       this.curr_depth++;
       if (this.checkEnd(this.player) != null) {
         this.end = "yes";
-        console.log(" game should endddd");
         this.winner = (this.checkEnd(this.player) == "tie") ? "tie" : "human"; // log the winner 
         // PRINT WINNER HERE
         this.print_winner();
@@ -258,7 +233,6 @@ class TicTacToe {
   }
 
 };
-
 // board for the game
 const make_board = (canvas_name, player, max_depth,helper) => {
   let w, h;
@@ -277,11 +251,13 @@ const make_board = (canvas_name, player, max_depth,helper) => {
       w = sketch.width / 3;
       h = sketch.height / 3;
       // first player is AI - choose between all corners and center
-      //let items = first_move_ai[Math.floor(Math.random() * first_move_ai.length)];
-      if (game.player=='ai'){
-        //game.board[items[0]][items[1]] = "ai";
-        //game.player = "human";
+      if (game.player=="ai" && max_depth==Infinity){
         game.find_move();
+      }
+      else if (game.player=="ai"){
+        let items = first_move_ai[Math.floor(Math.random() * first_move_ai.length)];
+        game.board[items[0]][items[1]] = "ai";
+        game.player = "human";
       }
     }
     // DRAW
@@ -300,19 +276,15 @@ const make_board = (canvas_name, player, max_depth,helper) => {
         let i = Math.floor(sketch.mouseX / w);
         let j = Math.floor(sketch.mouseY / h);
         game.human_move_help();
-        //line(mouseX,mouseY,mouseX+100,mouseY+100);
         if (game.board[i][j] == "" && game.end == "no") {
           game.board[i][j] = "human";
           game.curr_depth++; // increment the depth
           // check if human won
           let res = game.checkEnd(game.player);
-          
-          console.log("ressss is " + res);
           if (res != null) {
-            game.winner = (res == "tie") ? "tie" : "human";
+            game.winner = (res == "tie") ? "tie" : "ai";
             game.end = "yes";
             sketch.noLoop();
-            //console.log(game.end);
             //sketch.clear();
             // PRINT WINNER HERE 
             game.print_winner();
@@ -328,14 +300,14 @@ const make_board = (canvas_name, player, max_depth,helper) => {
   return board;
 }
 
-let temp3,temp1,temp2;
+let temp;
 $(document).ready(function () {
-  let level = 'Impossible';
-  let startingplayer = 'ai';
+  let level = "Medium";
+  let startingplayer = "ai";
   let helper = false; // default
-  temp1 = new p5(make_board('can1', startingplayer, level,helper));
-  temp2 = new p5(make_board('can2', startingplayer, level,helper));
-  temp3 = new p5(make_board('can3', startingplayer, level,helper));
+  temp = new p5(make_board('can1', startingplayer, level,helper));
+  //temp2 = new p5(make_board('can2', startingplayer, level,helper));
+  //temp3 = new p5(make_board('can3', startingplayer, level,helper));
   consoleHello();
 
   $('#depth').on('change', function () {
@@ -358,16 +330,11 @@ $(document).ready(function () {
     console.log(level);
     console.log(helper);
     $('#winner').html('&nbsp;');
-    temp1 = new p5(make_board('can1', startingplayer, level,helper));
-    temp2 = new p5(make_board('can2', startingplayer, level,helper));
-    temp3 = new p5(make_board('can3', startingplayer, level,helper));
+    temp = new p5(make_board('can1', startingplayer, level,helper));
+    //temp2 = new p5(make_board('can2', startingplayer, level,helper));
+    //temp3 = new p5(make_board('can3', startingplayer, level,helper));
   })
 })
-
-
-//new p5(make_board('can2'));
-//new p5(make_board('can3'));
-//new p5(make_board('can4'));
 
 //1,3,5,7,Infinity
 // This is to print SBG bots in console 

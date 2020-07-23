@@ -3,11 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
     <!--Using BULMA for designing the front end-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"
         integrity="sha256-aPeK/N8IHpHsvPBCf49iVKMdusfobKo2oxF8lRruWJg=" crossorigin="anonymous">
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/bulma-switch/dist/css/bulma-switch.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/js/bulma-extensions.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
 
@@ -15,72 +21,73 @@
     <title>AI vs. Human Tic Tac Toe</title>
 </head>
 
-<body> 
-    <section class="is-large has-text-centered is-light">
+<body>
+    <div class="is-large has-text-centered is-light">
         <h1 class="site-header">
-            Tic-Tac-Toe: Human vs. AI 
+            Tic-Tac-Toe: Human vs. AI
         </h1>
-    </section>
-    <section class="hero is-fullheight">
-        <div class="hero-body container">
-            <div class="column is-one-quarter">
-                    <div class="container has-text-centered has-text-white">
-                    <!--center the box, default is container-->
-                        <form class="container">
-                        <!--for the hints , difficulty and the starting player-->
-                        <div class="select is-multiple is-size-6">
-                            <label class="depth">Select difficulty level:</label>
-                            <select multiple size="5" class="depth" id="depth" name="depth">
-                                <option value="Easy">Easy</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Difficult">Difficult</option>
-                                <option value="Very Difficult">Very Difficult</option>
-                                <option value="Impossible">Impossible</option>
-                            </select>
-                        </div>
-                        <div class="select is-multiple is-size-6">
-                            <label class="player">Starting Player:</label>
-                            <select multiple size="2" class="player" id="player" name="player">
-                                <option value="ai">AI</option>
-                                <option value="human">Human</option>
-                            </select>
-                        </div>   
-                        <div class="select is-multiple is-size-6">
-                            <label class="helper">Want hints?</label>
-                            <select multiple size="2" class="helper" id="helper" name="helper">
-                                <option value="true">Yes</option>
-                                <option value="false">No</option>                        
-                            </select>
-                        </div>                                 
-                        <button id="submit" class="button is-light is-size-6 mt-2">Start Game</button>
-                        </form>
+    </div>
+    <div class="container columns is-vcentered is-centered">
+        <div class="column is-one-quarter">
+            <div class="has-text-centered has-text-white">
+                <!--center the box, default is container-->
+                <form>
+                    <!--for the hints , difficulty and the starting player-->
+                    <div class="select is-multiple is-size-6">
+                        <label class="depth">Select difficulty level:</label>
+                        <select multiple size="5" class="depth" id="depth" name="depth">
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Difficult">Difficult</option>
+                            <option value="Very Difficult">Very Difficult</option>
+                            <option value="Impossible">Impossible</option>
+                        </select>
                     </div>
+                    <div class="select is-multiple is-size-6">
+                        <label class="player">Starting Player:</label>
+                        <select multiple size="2" class="player" id="player" name="player">
+                            <option value="ai">AI</option>
+                            <option value="human">Human</option>
+                        </select>
+                    </div>
+                    <div class="select is-multiple is-size-6">
+                        <label class="helper">Want hints?</label>
+                        <input type="checkbox" size="2" class="checkbox" id="helper" name="helper">
+                        </input>
+                    </div>
+                    <button id="submit" class="button is-light is-size-6 mt-2">Start Game</button>
+                </form>
             </div>
-            <div class="column is-two-fifths has-text-centered is-light">
-                <div class="result">
-                    <h3 class="is-size-3" id='winner'>&nbsp;</h3>
-                </div>
-                <div id='can1'></div>
+
+        </div>
+        <div class="column is-two-fifths has-text-centered is-light">
+            <div class="result">
+                <h3 class="is-size-3" id='winner'>&nbsp;</h3>
             </div>
-            <div class="column is-one-quarter">
-                <div class="box">
-                    <p class="para is-size-6">
-                        <header class="para-header">
-                            Instructions
-                        </header>
-                        In order to win the game, a player must place three 
-                        of their marks in a horizontal, vertical, or diagonal row.
-                    </p>
-                </div>
+            <div id='can1'></div>
+        </div>
+        <div class="column is-one-quarter">
+            <div class="box">
+                <p class="para is-size-6">
+                <header class="para-header">
+                    Instructions
+                </header>
+                In order to win the game, a player must place three
+                of their marks in a horizontal, vertical, or diagonal row.
+                </p>
             </div>
-    </section>
+        </div>
+    </div>
+    <div class="push"></div>
     <footer class="footer has-background-grey-dark">
         <div class="wrapper">
-            <span>Made with <img src="images/heart.svg"> by SBG Bots <a href="meetTheTeam.html"><img src="images/copyright.svg"></a></span>
-                <br><a href="MAINPAGE.html">Home</a>                          
-                <br><a href="https://github.com/bhumikabhatia/sbg-bots">View on GitHub</a>
+            <span>Made with <img src="images/heart.svg"> by SBG Bots <a href="meetTheTeam.html"><img
+                        src="images/copyright.svg"></a></span>
+            <br><a href="MAINPAGE.html">Home</a>
+            <br><a href="https://github.com/bhumikabhatia/sbg-bots">View on GitHub</a>
         </div>
     </footer>
 </body>
 <script src="aivshuman.js"></script>
+
 </html>

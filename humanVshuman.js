@@ -172,8 +172,7 @@ const make_board = (canvas_name,player) => {
             sketch.noLoop();
             sketch.clear();
             // PRINT WINNER HERE 
-            game.print_winner();
-            //$("#curr-player").text("GAME END");
+            game.print_winner();           
             sketch.fill(50);
           }
           else { // next player

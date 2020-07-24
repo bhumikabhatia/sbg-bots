@@ -75,6 +75,7 @@ class TicTacToe {
       $("#winner").text ("Winner is "+this.winner+"!");
     else 
       $("#winner").text ("It's a "+this.winner+"!");
+    $("#curr-player").text("GAME END");
   }
   human_move_help = () =>{
     if (this.helper==true && this.player=="human" && this.end=="no"){

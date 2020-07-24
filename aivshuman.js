@@ -78,11 +78,15 @@ class TicTacToe {
     }
   }
   print_winner = () => {
-    if (this.winner!="tie")
-      $("#winner").text ("Winner is "+this.winner+"!");
+    if (this.winner!="tie"){
+      if(this.winner == "ai")
+        $("#winner").text ("Winner is X , "+this.winner+" !");
+      else if(this.winner == "human")
+        $("#winner").text ("Winner is O , "+this.winner+" !");
+    }
     else 
       $("#winner").text ("It's a "+this.winner+"!");
-    //$("#curr-player").text("GAME END");
+    $("#curr-player").text("GAME END");
   }
   human_move_help = () =>{
     if (this.helper==true && this.player=="human" && this.end=="no"){
@@ -111,7 +115,6 @@ class TicTacToe {
   }
   find_move = () => {
     let bestscore = this.player == "ai" ? -Infinity : Infinity;
-
     let move;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
@@ -271,9 +274,7 @@ const make_board = (canvas_name, player, max_depth,helper) => {
   var game = new TicTacToe(max_depth, player, w, h,helper);
 
   let board = (sketch) => {
-    //print current player
-    
-    // SETUP 
+        // SETUP 
     sketch.setup = () => {
       // create board
       sketch.createCanvas(400, 400).parent(canvas_name); // height, width

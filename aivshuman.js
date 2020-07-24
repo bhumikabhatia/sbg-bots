@@ -82,6 +82,7 @@ class TicTacToe {
       $("#winner").text ("Winner is "+this.winner+"!");
     else 
       $("#winner").text ("It's a "+this.winner+"!");
+    //$("#curr-player").text("GAME END");
   }
   human_move_help = () =>{
     if (this.helper==true && this.player=="human" && this.end=="no"){
@@ -270,6 +271,8 @@ const make_board = (canvas_name, player, max_depth,helper) => {
   var game = new TicTacToe(max_depth, player, w, h,helper);
 
   let board = (sketch) => {
+    //print current player
+    
     // SETUP 
     sketch.setup = () => {
       // create board
@@ -313,7 +316,7 @@ const make_board = (canvas_name, player, max_depth,helper) => {
             console.log(game.end);
             sketch.clear();
             // PRINT WINNER HERE 
-            game.print_winner();
+            game.print_winner();          
           }
           else { // next player
             game.player = "ai";

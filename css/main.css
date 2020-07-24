@@ -49,6 +49,9 @@ html, body
     animation: blink 1s linear
     infinite;
 }
+.curr-player{
+    color: floralwhite;
+}
 .para
 {
     font-size: 15px;

@@ -29,7 +29,7 @@ class TicTacToe {
     curr_sketch.line(w * 2, 0, w * 2, curr_sketch.height);
     curr_sketch.line(0, h, curr_sketch.width, h);
     curr_sketch.line(0, h * 2, curr_sketch.width, h * 2);
-    curr_sketch.line(w, 0, w, curr_sketch.height); // TRIAL
+    curr_sketch.line(w, 0, w, curr_sketch.height); // TRIAL  
   }
   // adds O OR X 
   render_board = (curr_sketch, w, h) => {
@@ -54,6 +54,19 @@ class TicTacToe {
       }
     }
   }
+  //prints winner
+  print_winner = () => {    
+    if (this.winner!="tie"){
+      if(this.winner == "player1")
+        $("#winner").text ("Winner is O , "+this.winner+" !");
+      else if(this.winner == "player2")
+        $("#winner").text ("Winner is X , "+this.winner+" !");
+    }
+    else 
+      $("#winner").text ("It's a "+this.winner+"!");
+    $("#curr-player").text("GAME END");
+}
+
   isEmpty = () => {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
@@ -117,8 +130,13 @@ class TicTacToe {
 const make_board = (canvas_name,player) => {
   let w, h;
   var game = new TicTacToe(player, w, h);
-
+  
   let board = (sketch) => {
+    //print current player
+    if(game.player == "player1")
+      $("#curr-player").text("O's turn!");
+    else
+      $("#curr-player").text("X's turn!");
     // SETUP 
     sketch.setup = () => {
       // create board
@@ -135,12 +153,14 @@ const make_board = (canvas_name,player) => {
       }
     }
     // MOUSE PRESS
-    sketch.mousePressed = () => {
+    sketch.mousePressed = () => { 
+            
       if (game.end == "no") {
         //console.log("hi");
         let i = Math.floor(sketch.mouseX / w);
         let j = Math.floor(sketch.mouseY / h);
         //line(mouseX,mouseY,mouseX+100,mouseY+100);
+        
         if (game.board[i][j] == "" && game.end=="no") {
           game.board[i][j] = game.player;
           //console.log("player1's turn");
@@ -152,12 +172,18 @@ const make_board = (canvas_name,player) => {
             sketch.noLoop();
             sketch.clear();
             // PRINT WINNER HERE 
-            $("#winner").text ("Winner: " + game.winner);
+            game.print_winner();
+            //$("#curr-player").text("GAME END");
             sketch.fill(50);
           }
           else { // next player
             game.player = (game.player=="player1") ? "player2" : "player1";
-            //game.find_move();
+            //print current player
+            if(game.player == "player1")
+              $("#curr-player").text("O's turn!");
+            else
+              $("#curr-player").text("X's turn!");
+              //game.find_move();
           }
         }
       } // CLEAR BOARD AFTER GAME HAS ENDED
@@ -175,6 +201,7 @@ $(document).ready(function () {
     temp.remove(); // Clears the p5 object
 
     $('#winner').html('&nbsp;');
+    $('#curr-player').html("Current Player :");
     temp = new p5(make_board('can1', "player1"));
   })
 })

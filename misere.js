@@ -245,6 +245,8 @@ const make_board = (canvas_name, player, max_depth,helper) => {
   var game = new TicTacToe(max_depth, player, w, h,helper);
 
   let board = (sketch) => {
+    //play
+    $("#curr-player").text("PLAY!");
     // SETUP 
     sketch.setup = () => {
       // create board
